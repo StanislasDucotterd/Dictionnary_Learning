@@ -1,0 +1,36 @@
+{
+    "dict_params": {
+        "atom_size": 8,
+        "diff_steps": 50,
+        "init": "random",
+        "nb_atoms": 300,
+        "nb_channels": 1,
+        "nondiff_steps": 0,
+        "stride": 1
+    },
+    "exp_name": "Norm_reg_0.0275_stride_1_lr_1e-3_1e-3_nd_0_d_50_gamma_0.75_batch_4B",
+    "log_dir": "exps/sigma_5",
+    "prox_params": {
+        "groupsize": 1,
+        "learn_threshold": true,
+        "linearity": "none",
+        "prox_type": "norm",
+        "spline_range": 0.1,
+        "spline_size": 81,
+        "threshold": 0.0275
+    },
+    "seed": 42,
+    "sigma": 5,
+    "training_options": {
+        "batch_size": 4,
+        "epochs": 2,
+        "gamma": 0.75,
+        "lr": 0.001,
+        "lr_linearity": 0.0,
+        "lr_spline": 0.0,
+        "lr_threshold": 0.001,
+        "num_workers": 2,
+        "train_data_file": "/home/ducotter/Lipschitz_DSNN/data/BSD500/train.h5",
+        "val_data_file": "/home/ducotter/Lipschitz_DSNN/data/BSD500/val.h5"
+    }
+}
