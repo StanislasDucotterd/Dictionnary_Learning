@@ -3,6 +3,7 @@ from torch.utils.data import Dataset, DataLoader
 import numpy as np
 import h5py
 import random
+random.seed(1)
 
 class BSD500(Dataset):
 

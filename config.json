@@ -1,36 +1,38 @@
 {
     "dict_params": {
-        "atom_size": 8,
-        "diff_steps": 50,
-        "init": "random",
-        "nb_atoms": 300,
+        "atom_size": 10,
+        "beta": 2.0,
+        "hyper_learnable": false,
+        "mu": 1.0,
+        "nb_atoms": 128,
         "nb_channels": 1,
-        "nondiff_steps": 0,
-        "stride": 1
+        "res": 0.0001,
+        "unroll_steps": 2
     },
-    "exp_name": "Norm_reg_0.0275_stride_1_lr_1e-3_1e-3_nd_0_d_50_gamma_0.75_batch_4B",
-    "log_dir": "exps/sigma_5",
+    "exp_name": "DEQL1Norm_128_atomsize_10_beta_2.0_step_2_threshold_0.0075B",
+    "log_dir": "exps/sigma_25",
     "prox_params": {
-        "groupsize": 1,
-        "learn_threshold": true,
-        "linearity": "none",
-        "prox_type": "norm",
-        "spline_range": 0.1,
-        "spline_size": 81,
-        "threshold": 0.0275
+        "prox_type": "l1norm",
+        "spline_init": "zero",
+        "spline_lambda": 2.5e-05,
+        "spline_range": 0.002,
+        "spline_size": 51,
+        "threshold": 0.0075
     },
     "seed": 42,
-    "sigma": 5,
+    "sigma": 25,
     "training_options": {
-        "batch_size": 4,
-        "epochs": 2,
-        "gamma": 0.75,
-        "lr": 0.001,
-        "lr_linearity": 0.0,
-        "lr_spline": 0.0,
-        "lr_threshold": 0.001,
+        "batch_size": 64,
+        "epochs": 1,
+        "loss": "mae",
+        "lr": 0.0005,
+        "lr_decay": 0.75,
+        "lr_hyper": -1,
+        "lr_spline": 1.25e-05,
+        "lr_spline_scaling": 0.000125,
         "num_workers": 2,
-        "train_data_file": "/home/ducotter/Lipschitz_DSNN/data/BSD500/train.h5",
-        "val_data_file": "/home/ducotter/Lipschitz_DSNN/data/BSD500/val.h5"
+        "train_data_file": "/home/ducotter/nerf_dip/images/train.h5",
+        "val_data_file": "/home/ducotter/nerf_dip/images/test.h5",
+        "weight_decay": 0.0
     }
 }
