@@ -1,10 +1,14 @@
-import math
 import torch
-import torch_dct as dct
 
-def get_dct(nb_atoms, nb_channels, atom_size):
-    atoms = torch.eye(nb_channels * atom_size ** 2)
-    atoms = atoms.reshape(nb_channels * atom_size ** 2, nb_channels, atom_size, atom_size)
-    atoms = dct.dct_2d(atoms).repeat(math.ceil(nb_atoms / atom_size**2), 1, 1, 1)[:nb_atoms,...]
-    atoms = atoms - torch.mean(atoms, dim=(1,2,3)).reshape(-1, 1, 1, 1) + torch.randn(atoms.shape) * 0.05
+def get_gabor(nb_atoms, nb_channels, atom_size):
+    a = 2.0*torch.rand(nb_atoms, nb_channels, 1, 1, 2)
+    w0 = torch.pi*torch.rand(nb_atoms, nb_channels, 1, 1, 2)
+    x0 = (atom_size-1)*torch.rand(nb_atoms, nb_channels, 1, 1, 2)
+    psi = 2*torch.pi*torch.rand(nb_atoms, nb_channels, 1, 1)
+
+    i = torch.arange(atom_size).to(a.device)
+    x = torch.stack(torch.meshgrid(i,i, indexing='ij'), dim=2)[None,None,...]
+
+    atoms = torch.exp(-torch.sum((a*(x-x0))**2, dim=-1)) * torch.cos(torch.sum(w0*(x-x0), dim=-1) + psi)
+    atoms = (atoms - torch.mean(atoms, dim=(1,2,3)).reshape(-1, 1, 1, 1)) / 40
     return atoms
